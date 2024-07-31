@@ -1,5 +1,5 @@
 ### URL WatchDog Script
-![UptimeMonitor](https://github.com/user-attachments/assets/537a90f9-b927-4464-9fa2-eb1e6d006ab6)
+![UptimeMonitor](https://github.com/user-attachments/assets/8c9fbfd7-c37f-479f-aa4b-503ea61ab96a)
 
 This script is a monitoring script that checks the status of multiple websites and sends notifications to WhatsApp when a website's status changes. Here's a breakdown of what the script does:
 
