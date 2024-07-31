@@ -9,7 +9,7 @@
         "keyword": "Facebook"
     },
     {
-        "url": "172.21.172.10",
-        "name": "DR_HUB_APP_SERVER"
+        "url": "172.11.172.110",
+        "name": "DR_APP_SERVER"
     }
 ]
