@@ -1,4 +1,5 @@
 # Python_Scripts
 
-![terminal (1)](https://github.com/user-attachments/assets/32157913-5f3b-461a-ba3c-8fb6c1030ff0)
+![terminal (2)](https://github.com/user-attachments/assets/bfe19b7b-49ac-4d65-8e92-b7c38be320d1)
+
 
