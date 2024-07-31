@@ -2,11 +2,14 @@
     {
         "url": "https://192.168.20.2:8006",
         "name": "TEST 1",
-        "keyword": "Proxmox"
     },
     {
         "url": "https://www.facebook.com",
         "name": "SSNL TESTING 2",
         "keyword": "Facebook"
+    },
+    {
+        "url": "172.21.172.10",
+        "name": "DR_HUB_APP_SERVER"
     }
 ]
