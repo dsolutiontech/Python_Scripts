@@ -27,9 +27,16 @@ The script runs indefinitely, sleeping for 30 seconds between iterations.
 
 `sudo apt install python3-dotenv`
 
+### Starting script at boot
+`sudo crontab -e`
+
+**Add this line to the bottom of the file**
+
+`@reboot python3 path/to/your/script/uptime.py`
+
 ### How to terminate the script?
-`sudo kill $(pgrep -f "path/to/your/script/uptime.py")`
+`sudo kill $(pgrep -f "path/to/your/script/url_watchdog.py")`
 
 **Example:**
 
-`sudo kill $(pgrep -f "home/dsolutiontech/URL_WatchDog/uptime.py")`
+`sudo kill $(pgrep -f "home/dsolutiontech/URL_WatchDog/url_watchdog.py")`
