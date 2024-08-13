@@ -32,7 +32,7 @@ The script runs indefinitely, sleeping for 30 seconds between iterations.
 
 **Add this line to the bottom of the file**
 
-`@reboot python3 path/to/your/script/uptime.py`
+`@reboot /usr/bin/python3 path/to/your/script/url_watchdog.py`
 
 ### How to terminate the script?
 `sudo kill $(pgrep -f "path/to/your/script/url_watchdog.py")`
