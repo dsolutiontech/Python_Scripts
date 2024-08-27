@@ -1,3 +1,4 @@
+![md5_decrypt](https://github.com/user-attachments/assets/830c3448-18b2-4034-a31d-468748daf691)
 ### MD5 Decrypt Script
 This script is designed to crack MD5 hashes using a wordlist of potential passwords. It sends notifications about the completion of the password cracking process via WhatsApp. The script includes logging functionality to record the status and results of the operations. It accomplishes this by:
 
