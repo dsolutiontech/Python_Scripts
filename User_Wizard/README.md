@@ -1,4 +1,6 @@
-### User Wizard Script
+
+### User Wizard Script![user_wizard](https://github.com/user-attachments/assets/9865f0d0-c7dc-44fe-bfef-56c26b06a597)
+
 This is a command-line utility that facilitates the creation of user accounts on a Unix-like system. The script is designed for administrators and utilizes the subprocess module to make system calls for user management. Here's a breakdown of what the script does:
 
 
