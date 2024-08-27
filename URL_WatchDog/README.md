@@ -23,9 +23,9 @@ The script runs indefinitely, sleeping for 30 seconds between iterations.
 
 `sudo apt install python3`
 
-`sudo apt install python3-requests`
+`sudo apt install python3-pip`
 
-`sudo apt install python3-dotenv`
+`pip3 install requests python-dotenv`
 
 ### Starting script at boot
 `sudo crontab -e`
