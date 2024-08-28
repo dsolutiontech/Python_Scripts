@@ -27,16 +27,15 @@ logger = logging.getLogger() # Get the logger
 # Load environment variables
 load_dotenv()
 # Get the WhatsApp API token, chat ID, and instance ID from the environment variables
-WHATSAPP_API_TOKEN = os.environ.get('WHATSAPP_API_TOKEN') # Get the WhatsApp API token
-WHATSAPP_CHAT_ID = os.environ.get('WHATSAPP_CHAT_ID') # Get the WhatsApp chat ID
-WHATSAPP_INSTANCE_ID = os.environ.get('WHATSAPP_INSTANCE_ID') # Get the WhatsApp instance ID
+WHATSAPP_API_TOKEN = os.environ.get('WHATSAPP_API_TOKEN')
+WHATSAPP_CHAT_ID = os.environ.get('WHATSAPP_CHAT_ID')
+WHATSAPP_INSTANCE_ID = os.environ.get('WHATSAPP_INSTANCE_ID')
 WHATSAPP_URL = f'https://7103.api.greenapi.com/waInstance{WHATSAPP_INSTANCE_ID}/sendMessage/{WHATSAPP_API_TOKEN}' # Set the WhatsApp API URL
 headers = {'Content-Type': 'application/json'} # Set the headers for the WhatsApp API
 # Function to send a message to WhatsApp
 def send_message(message):
-# Send a message to WhatsApp using the WhatsApp API.
     data = {"chatId": WHATSAPP_CHAT_ID, "message": message} # Set the chat ID and message data
-    try: # Try to send the message
+    try: 
         response = requests.post(WHATSAPP_URL, headers=headers, json=data) # Send a POST request to the WhatsApp API
         if response.status_code == 200: # Check if the message was sent successfully
             logger.info(f'Message sent to {WHATSAPP_CHAT_ID}') # Log the message sent
@@ -45,16 +44,17 @@ def send_message(message):
             logger.error(response.text) # Log the response text
     except Exception as e: # Handle any exceptions that occur during message sending
         logger.error(f'Error sending message: {str(e)}') # Log the error
+        
 # Define the base directory and create the 'students' and 'administrators' directories
 BASE_DIR = "/workspaces/python-development/python/User_Wizard" # Set the base directory (adjust the path as needed)
-STUDENT_DIR = os.path.join(BASE_DIR, "students") # Set the 'students' directory
-ADMIN_DIR = os.path.join(BASE_DIR, "administrators") # Set the 'administrators' directory
+STUDENT_DIR = os.path.join(BASE_DIR, "students") 
+ADMIN_DIR = os.path.join(BASE_DIR, "administrators")
 # Create the 'students' and 'administrators' directories if they do not exist
-os.makedirs(STUDENT_DIR, exist_ok=True) # Create the 'students' directory
-os.makedirs(ADMIN_DIR, exist_ok=True) # Create the 'administrators' directory
+os.makedirs(STUDENT_DIR, exist_ok=True)
+os.makedirs(ADMIN_DIR, exist_ok=True)
 # Function to check if the username is valid
 def is_valid_username(username):
-    return re.match("^[a-zA-Z0-9_]{3,20}$", username) is not None # Return True if the username is valid, False otherwise (check for 3-20 characters containing letters, numbers, and underscores only)
+    return re.match("^[a-z0-9_]{3,20}$", username) is not None and not username.isdigit() # Return True if the username is valid, False otherwise (check for 3-20 characters containing lowercase letters, numbers, and underscores only)
 # Function to check if the password is valid
 def is_valid_password(password):
     return len(password) >= 8 # Return True if the password is at least 8 characters long, False otherwise (check for a minimum length of 8 characters)
@@ -80,6 +80,7 @@ def create_user(username, password, user_type):
     except subprocess.CalledProcessError as e: # Handle any errors that occur during user creation
         logger.error(f"Error creating user '{username}': {e}") # Log the error
         print(f"Error creating user '{username}': {e}") # Print the error message
+        
 # Main function to create a new user or superadmin
 def main():
     current_username = getpass.getuser() # Get the current username
@@ -94,50 +95,55 @@ def main():
         
         if choice == '1': # Create a new user
             username = input("Enter (new user) username: ").strip() # Get the username for the new user
-            if user_exists(username): # Check if the user already exists
-                logger.error(f"User '{username}' already exists.") # Log the warning
-                print(f"Sorry, username: '{username}' already exists.") # Print the error message
-                continue # Continue to the next iteration of the loop
             
+            if not is_valid_username(username): # Validate the username first
+                logger.error(f"Invalid username provided: '{username}'.")
+                print("Error: Username must be 3-20 characters containing lowercase letters, numbers, and underscores only.")
+                continue # Continue to the next iteration of the loop
+
+            if user_exists(username): # Check if the user already exists
+                logger.info(f"User '{username}' already exists.") 
+                print(f"Sorry, username: '{username}' already exists.")
+                continue # Continue to the next iteration of the loop
+    
             password = getpass.getpass(f"Enter password for '{username}': ") # Get the password for the new user
             if not is_valid_password(password): # Check if the password is valid
-                logger.error(f"Weak password provided for user: {username}") # Log the warning
-                print("Error: Password should be at least 8 characters.") # Print the error message
+                logger.error(f"Weak password provided for user: {username}")
+                print("Error: Password should be at least 8 characters.")
                 continue # Continue to the next iteration of the loop
             
-            if is_valid_username(username): # Check if the username is valid
-                create_user(username, password, 'student') # Create a new user
-            else: # Handle invalid usernames
-                logger.error(f"Invalid username provided: '{username}'.")  # Log the invalid username error
-                print("Error: Username must be 3-20 characters containing letters, numbers, and underscores only.") # Print the error message
-
+            create_user(username, password, 'student') # Create a new user
+            
         elif choice == '2': # Create a new superadmin
             username = input("Enter (new superadmin) username: ").strip() # Get the username for the new superadmin
+            
+            if not is_valid_username(username): # Validate the username first
+                logger.error(f"Invalid username provided: '{username}'.")
+                print("Error: Username must be 3-20 characters containing lowercase 1letters, numbers, and underscores only.")
+                continue # Continue to the next iteration of the loop
+
             if user_exists(username): # Check if the user already exists
-                logger.error(f"User '{username}' already exists.") # Log the warning
-                print(f"Sorry, username '{username}' already exists.") # Print the error message
+                logger.info(f"User '{username}' already exists.") 
+                print(f"Sorry, username '{username}' already exists.")
                 continue # Continue to the next iteration of the loop
             
             password = getpass.getpass(f"Enter password for '{username}': ") # Get the password for the new superadmin
             if not is_valid_password(password): # Check if the password is valid
-                logger.error(f"Weak password provided for user: {username}") # Log the warning
-                print("Error: Password should be at least 8 characters.") # Print the error message
+                logger.error(f"Weak password provided for user: {username}") 
+                print("Error: Password should be at least 8 characters.")
                 continue # Continue to the next iteration of the loop
             
-            if is_valid_username(username): # Check if the username is valid
-                create_user(username, password, 'admin') # Create a new superadmin
-            else: # Handle invalid usernames
-                logger.error(f"Invalid username provided: '{username}'.")  # Log the invalid username error
-                print("Error: Username must be 3-20 characters containing letters, numbers, and underscores only.") # Print the error message
+            create_user(username, password, 'admin') # Create a new superadmin
 
         elif choice == '3': # Exit the script
-            logger.error(f"Exiting the script. Goodbye!") # Log the exit message
-            print("Exiting the script. Goodbye!") # Print a goodbye message
+            logger.info(f"Exiting the script. Goodbye!")
+            print("Exiting the script. Goodbye!")
             break # Break out of the loop
 
         else: # Handle invalid choices
-            logger.error(f"Invalid option selected: '{choice}'.") # Log the invalid option error
-            print("Uh oh.. You have selected an invalid option.") # Print the error message
+            logger.error(f"Invalid option selected: '{choice}'.") 
+            print("Uh oh.. You have selected an invalid option.")
+            
 # Run the main function
 if __name__ == "__main__":
     main()
