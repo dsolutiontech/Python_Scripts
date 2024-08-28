@@ -1,4 +1,3 @@
-
 ![user_wizard](https://github.com/user-attachments/assets/9865f0d0-c7dc-44fe-bfef-56c26b06a597)
 ### User Wizard Script
 This is a command-line utility that facilitates the creation of user accounts on a Unix-like system. The script is designed for administrators and utilizes the subprocess module to make system calls for user management. Here's a breakdown of what the script does:
@@ -14,6 +13,8 @@ This is a command-line utility that facilitates the creation of user accounts on
 8. The script includes checks for `valid usernames` and `passwords` to enforce `security best practices`.
 
 The script loops indefinitely, until user ends it.
+
+![user_wizard](https://github.com/user-attachments/assets/5fbe503d-d60b-466a-a9d0-889dedd6aaf0)
 
 ### Installing `python3` and its required packages `requests` and `dotenv`
 
