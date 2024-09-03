@@ -16,6 +16,7 @@ This script is designed to crack MD5 hashes using a wordlist of potential passwo
 * After `attempting to crack` the hashes, it writes the `results` to the specified output file and logs a `completion message`.
 * Once cracking is completed, it sends a `summary message` detailing how many passwords were cracked.
 
+![CrackMD5Hash1-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/5d06dcdd-413c-499d-b49a-443d48df306e)
 
 ### Installing `python3` and its required packages `requests` and `dotenv`
 
